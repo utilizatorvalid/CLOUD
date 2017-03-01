@@ -5,15 +5,22 @@ import { EventService } from './event.service'
     selector: 'event-list',
     template:`
             <h1>{{title}}</h1>
-            <ul>
-              <li *ngFor = "let event of events">
+            <div>
+              <div class="box" *ngFor = "let event of events">
                 <event [event]="event"></event>
-              </li>
-            </ul>
+              </div>
+            </div>
             <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>`
             ,
     providers: [ EventService ],
-    styles: ['.error {color:red;}']
+    styles: ['.error {color:red;}',
+              `.box{
+                display: inline-block;
+                width: 1000px;
+                height: 1000px;
+              }
+              `
+              ]
 })
 
 export class EventListComponent implements OnInit { 

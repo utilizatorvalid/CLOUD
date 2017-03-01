@@ -4,7 +4,10 @@ import { Event } from './event'
     selector:'event',
     templateUrl:'app/templates/event.html',
     styles : [`.event-card {
+                display: inline-block;
                 width: 400px;
+                height: 400px;
+                margin: 1em;
                 }
 
                 .example-header-image {

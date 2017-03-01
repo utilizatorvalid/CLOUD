@@ -3,6 +3,7 @@ export class Event{
     name:string;
     coverPicture:string;
     description: string;
+    short_description:string;
     constructor(id:string, 
                 name:string,
                 coverPicture:string,
@@ -12,5 +13,6 @@ export class Event{
         this.name = name;
         this.coverPicture = coverPicture,
         this.description = description
+        this.short_description = description.substring(0,500)+"...";
     }
 }
