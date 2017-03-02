@@ -1,26 +1,11 @@
 import { Component, OnInit} from '@angular/core'
-import { Event } from '../event'
+import { Event } from './event'
 import { EventService } from './event.service'
 @Component({
     selector: 'event-list',
-    template:`
-            <h1>{{title}}</h1>
-            <div>
-              <div class="box" *ngFor = "let event of events">
-                <event [event]="event"></event>
-              </div>
-            </div>
-            <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>`
-            ,
+    templateUrl:'./templates/event-list.component.html',
     providers: [ EventService ],
-    styles: ['.error {color:red;}',
-              `.box{
-                display: inline-block;
-                width: 1000px;
-                height: 1000px;
-              }
-              `
-              ]
+    styleUrls: ['./styles/event-list.component.css' ]
 })
 
 export class EventListComponent implements OnInit { 

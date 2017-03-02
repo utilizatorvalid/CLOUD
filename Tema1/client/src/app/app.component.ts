@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import { AppEventComponent } from './app.event'
-import { Event } from './event'
-
+import {AppEventComponent } from './event/app.event'
 @Component({
-  selector: 'my-app',
-  template: ` <event-list></event-list>
-            
-            `,
-
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent{ 
- 
+export class AppComponent {
 }

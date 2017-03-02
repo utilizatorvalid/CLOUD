@@ -3,7 +3,7 @@ export class Event{
     name:string;
     coverPicture:string;
     description: string;
-    short_description:string;
+    fb_link: string;
     constructor(id:string, 
                 name:string,
                 coverPicture:string,
@@ -12,7 +12,7 @@ export class Event{
         this.id = id;
         this.name = name;
         this.coverPicture = coverPicture,
-        this.description = description
-        this.short_description = description.substring(0,500)+"...";
+        this.description = description,
+        this.fb_link = "https://www.facebook.com/events/"+id+'/'
     }
 }

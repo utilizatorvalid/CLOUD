@@ -1,0 +1,6 @@
+<h1><span class="red-text text-darken-1">{{title}}</span></h1>
+<div class="gallery-background"></div>
+<div class='events_container'>
+    <event class='event' *ngFor = "let event of events" [event]="event"></event>
+</div>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
