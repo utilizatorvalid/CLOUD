@@ -6,7 +6,17 @@ var geolocationapi = 'http://ip-api.com/json'//+  /ip
 var request = require('request');
 var express = require('express');
 var app = express();
-var distance = 1000;
+var distance = 10000;
+
+app.use(function (req, res, next) {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 app.get('/events',function(req, res){
     // console.log(req)
     
