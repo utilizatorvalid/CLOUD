@@ -62,8 +62,8 @@ class MyServer {
 
         var next = this.routes[req.method][path];
         if (!next) {
-            res.send404();
-            return;
+            return res.send404();
+
         }
         this.mapVerb(req, res, req.method, path, next);
 
@@ -71,60 +71,48 @@ class MyServer {
     mapVerb(req, res, verb, route, next) {
         var url_split = req.url.split('/');
         console.log(url_split);
-        if (req.method == "GET") {
+        if (req.method == "GET" || req.method == "DELETE") {
 
-            if (url_split.length > 3) {
-                res.send404();
-                return;
-            }
+            if (url_split.length > 3)
+                return res.send404();
+
             req.eventID = url_split[2];
-            next(req, res);
+            return next(req, res);
         }
         if (req.method == "POST") {
-            if (url_split.length > 2) {
-                res.send400("");
-                return;
-            }
+            if (url_split.length > 2)
+                return res.send400("Please post on /events");
+
             var body = '';
             var postData;
             req.on('data', function (data) {
                 body += data;
-
-                // Too much POST data, kill the connection!
-                // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
                 if (body.length > 1e6)
                     request.connection.destroy();
             });
 
             req.on('end', function () {
-                // console.log(body, body.length);
                 try {
                     postData = JSON.parse(body);
 
                 } catch (error) {
                     console.log(error)
-                    // postData = null    
                 }
                 req.body = postData;
-                // res .end(JSON.stringify(post));
-                next(req, res);
+                return next(req, res);
             });
         }
 
-        if(req.method == "PUT"){
-            if (url_split.length > 3) {
-                res.send404();
-                return;
-            }
+        if (req.method == "PUT" || req.method == "PATCH") {
+            if (url_split.length > 3)
+                return res.send404();
+
             req.eventID = url_split[2];
-            
+
             var body = '';
             var postData;
             req.on('data', function (data) {
                 body += data;
-
-                // Too much POST data, kill the connection!
-                // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
                 if (body.length > 1e6)
                     request.connection.destroy();
             });
@@ -132,14 +120,13 @@ class MyServer {
             req.on('end', function () {
                 try {
                     postData = JSON.parse(body);
-
                 } catch (error) {
                     console.log(error)
                 }
                 req.body = postData;
-                next(req, res);
+                return next(req, res);
             });
-    }
+        }
 
     }
     serve() {

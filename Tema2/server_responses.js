@@ -27,11 +27,12 @@ class Responer {
         this.write("There is no souch a route registred :( page not found ");
         this.end();
     }
-    send500() {
+    send500(err) {
         this.writeHead(500, {
             'Content-Type': 'text/plain'
         });
         this.write("Highly trained monkey will fix this soon :D");
+        this.write(err);
         this.end();
     }
 }
