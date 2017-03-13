@@ -49,6 +49,20 @@ app.put("/events", (req, res)=>{
     });
 });
 
+app.patch("/events", (req, res)=>{
+    if (!req.eventID)
+        return res.send400("give us an id for event to modiffy");
+    if(!req.body)
+        return  res.send400("malformatted json");
+    
+    es.patchEvent(req.eventID, req.body, (err, data)=>{
+        if(err)
+            return res.send400(err); 
+
+        res.send200(data)   
+    });
+});
+
 app.delete('/events', (req, res)=>{
     if (!req.eventID)
        return es.deleteAllEvents((err, data) => {

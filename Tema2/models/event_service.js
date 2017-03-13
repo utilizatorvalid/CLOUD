@@ -109,6 +109,33 @@ class EventDataService {
         })
     }
 
+    patchEvent(eventID, eventJson, next){
+        this.findEvent(eventID, (err,event_to_update)=>{
+            
+            if(err || event_to_update === null)
+                return next("Looks like event u want to update is not there","")
+            
+            if(eventJson.hasOwnProperty("id")) 
+                if(event_to_update.id != eventJson.id)
+                    return next("u cannot change your ID sorry :(","");
+
+            var good_json = true;
+            for(var key in eventJson){
+                if((eventJson.hasOwnProperty(key) && !event_to_update.hasOwnProperty(key)))
+                good_json = false;
+            }
+
+            if(!good_json)
+                return next("Bad body to many or invalid attributes","")    
+            
+            for(var key in eventJson){
+                        event_to_update[key] = eventJson[key];         
+                }
+            return next(null, "patched succesfully");
+        })
+    }
+    
+
 }
 
 module.exports = EventDataService;
