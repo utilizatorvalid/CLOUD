@@ -11,12 +11,12 @@ class Responer {
         }, null, 4))
         this.end();
     }
-    send400(data) {
+    send400(msg) {
         this.writeHead(400, {
             'Content-Type': 'json'
         });
         this.write(JSON.stringify({
-            data: data
+            info: msg
         }, null, 4));
         this.end();
     }

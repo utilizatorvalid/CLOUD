@@ -1,8 +1,7 @@
 const Server = require("./my_server.js");
-
-const app = new Server();
 const EventDataService = require('./models/event_service')
 
+const app = new Server();
 const es = new EventDataService();
 app.get('/events', (req, res) => {
     if (!req.eventID)
@@ -13,73 +12,73 @@ app.get('/events', (req, res) => {
         });
 
     es.findEvent(req.eventID, (err, data) => {
-            if (err)
-               return res.send500(err);
+        if (err)
+            return res.send500(err);
 
-            if (!data)
-                return res.send404("Seems like there is no event u looking for")
+        if (!data)
+            return res.send404("Seems like there is no event u looking for")
 
-            res.send200(data);
-        })
+        res.send200(data);
+    })
 })
 app.post("/events", (req, res) => {
-    
-    if(!req.body)
-        return  res.send400("malformatted json");
-    
-    es.createEvent(req.body, (err, data)=>{
-        if(err)
-            return res.send400(err); 
 
-        res.send200(data)   
+    if (!req.body)
+        return res.send400("malformatted json");
+
+    es.createEvent(req.body, (err, data) => {
+        if (err)
+            return res.send400(err);
+
+        res.send200(data)
     })
 });
 
-app.put("/events", (req, res)=>{
+app.put("/events", (req, res) => {
     if (!req.eventID)
         return res.send400("give us an id for event to modiffy");
-    if(!req.body)
-        return  res.send400("malformatted json");
-    
-    es.updateEvent(req.eventID, req.body, (err, data)=>{
-        if(err)
-            return res.send400(err); 
+    if (!req.body)
+        return res.send400("malformatted json");
 
-        res.send200(data)   
+    es.updateEvent(req.eventID, req.body, (err, data) => {
+        if (err)
+            return res.send400(err);
+
+        res.send200(data)
     });
 });
 
-app.patch("/events", (req, res)=>{
+app.patch("/events", (req, res) => {
     if (!req.eventID)
         return res.send400("give us an id for event to modiffy");
-    if(!req.body)
-        return  res.send400("malformatted json");
-    
-    es.patchEvent(req.eventID, req.body, (err, data)=>{
-        if(err)
-            return res.send400(err); 
+    if (!req.body)
+        return res.send400("malformatted json");
 
-        res.send200(data)   
+    es.patchEvent(req.eventID, req.body, (err, data) => {
+        if (err)
+            return res.send400(err);
+
+        res.send200(data)
     });
 });
 
-app.delete('/events', (req, res)=>{
+app.delete('/events', (req, res) => {
     if (!req.eventID)
-       return es.deleteAllEvents((err, data) => {
-            if (err) 
+        return es.deleteAllEvents((err, data) => {
+            if (err)
                 return res.send404(err);
             res.send200(data);
         });
-    
-    es.removeEvent(req.eventID, (err, data) => {
-            if (err) 
-                return res.send404(err);
-            
-            if (!data)
-                return res.send404()
 
-            res.send200(data);
-        })
+    es.removeEvent(req.eventID, (err, data) => {
+        if (err)
+            return res.send404(err);
+
+        if (!data)
+            return res.send404()
+
+        res.send200(data);
+    })
 });
 
 app.serve();

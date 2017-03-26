@@ -1,6 +1,6 @@
+const Responser = require("./server_responses")
 const http = require("http");
 const port = 3000;
-const Responser = require("./server_responses")
 const rs = new Responser();
 
 class MyServer {
@@ -18,7 +18,6 @@ class MyServer {
      * @param  {} callback function to handle get request
      */
     get(root, callback) {
-        console.log("regisetr " + root + " for GET request");
         this.routes["GET"][root] = callback;
 
     }
@@ -54,7 +53,6 @@ class MyServer {
         console.log("metoda:", req.method);
         var path = '/' + req.url.split('/')[1];
 
-        // req['eventID'] = 10;
         res.send200 = rs.send200.bind(res);
         res.send400 = rs.send400.bind(res);
         res.send404 = rs.send404.bind(res);
@@ -72,7 +70,7 @@ class MyServer {
         var url_split = req.url.split('/');
         console.log(url_split);
         if (req.method == "GET" || req.method == "DELETE") {
-
+            //422 pagina exist dar nu am resursa respectiva, pentru get si pt delete
             if (url_split.length > 3)
                 return res.send404();
 
