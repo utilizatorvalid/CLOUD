@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "es6"
+    },
+    "exclude": [
+        "nod_modules",
+        "assets"
+    ]
+}
