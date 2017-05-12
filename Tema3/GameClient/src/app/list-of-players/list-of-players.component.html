@@ -1,0 +1,21 @@
+<div class='row valign-wrapper'>
+  <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+    <div class='center-align'>
+      Players Online:
+    </div>
+    <ul class="collection">
+      <li *ngFor="let p of other_players" class="collection-item avatar valign-wrapper">
+        <img src="{{p.url_img}}" alt="" class="circle valign">
+        <span class="title">{{p.name}}</span>
+        <span class="badge">
+          <input type="checkbox" class ="player_checkbox pl_{{p.id}}" (change)="check($event)" id="{{p.id}}" />
+          <label for="{{p.id}}"></label>
+        </span>
+      </li>
+    </ul>
+    <button *ngIf="count==1" id="send_button" class="btn right waves-effect waves-light" type="submit" name="action" (click)="chalangePlayer()">Challenge
+        <i class="material-icons right">send</i>
+      </button>
+  </div>
+
+</div>

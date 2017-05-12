@@ -1,0 +1,5 @@
+<app-join id="join"  [player]="player" (playerChange)="onPlayerChanged($event)" [style.display]="(chat_visibility) ? 'none' : 'visible' " ></app-join>
+
+<app-list-of-players [style.display]="(player.in_game) ? 'none' : 'visible' " id="player_panel" [socket]="socket" [(player)]="player" ></app-list-of-players>
+<app-game *ngIf="player.in_game" [socket]="socket" [me]="player"  [opponent]="opponent" ></app-game>
+<app-chat id = "chat" [style.display]="(!player.in_game) ? 'none' : 'visible'" [socket]="socket" [player]="player" ></app-chat>

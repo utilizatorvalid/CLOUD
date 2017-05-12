@@ -1,0 +1,44 @@
+<div class="row">
+  <div class ="card hoverable center-align col s12 m8 l8">
+    <h1>Tic Hac Toe</h1>
+
+    <div id="game-container"></div>
+
+    <div id="game-template">
+    <div id="menu-container">
+      <ul id="menu" class="hidden">
+        <li id="time">Moves:</li>
+        <li id="status">Player X Wins!</li>
+        <li><a id="restart" class="button">RESTART</a></li>
+      </ul>
+    </div>
+    
+    <table id="game" class=""cellpadding="0" cellspacing="0">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    </div>
+    <div class="card-action right-align">
+        <button class="btn waves-effect waves-light" type="submit" (click)="endGame()" name="action">Exit
+        <i class="material-icons right">send</i>
+        </button>
+      </div>
+  </div>
+  
+  
+</div>
+
+ 
